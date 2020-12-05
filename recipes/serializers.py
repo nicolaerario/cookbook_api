@@ -2,8 +2,14 @@ from rest_framework import serializers
 from .models import Recipe
 
 
-class RecipeSerializer(serializers.ModelSerializer):
+class RecipeReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = ["id", "name", "time", "description", "ingredients", "parent_id"]
-        depth = 3  # TODO
+        depth = 9
+
+
+class RecipeWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recipe
+        fields = ["id", "name", "time", "description", "ingredients", "parent_id"]

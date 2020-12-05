@@ -8,4 +8,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
     search_fields = ["ingredients"]
     filter_backends = (filters.SearchFilter,)
     queryset = models.Recipe.objects.all()
-    serializer_class = serializers.RecipeSerializer
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == "PUT" or method == "POST":
+            return serializers.RecipeWriteSerializer
+        else:
+            return serializers.RecipeReadSerializer
